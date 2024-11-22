@@ -1,6 +1,7 @@
 import express from "express";
 
 const app = express();
+app.use(express.json);
 
 const posts = [
     {
@@ -33,6 +34,6 @@ app.listen(3000, () => {
     console.log("Servidor escutando!");
 });
 
-app.get("/api", (req,res) =>{
-    res.status(200).send("Olá!!");
+app.get("/posts", (req,res) =>{
+    res.status(200).json(posts);
 });
