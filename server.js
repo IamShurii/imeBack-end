@@ -44,11 +44,13 @@ app.get("/posts", (req,res) =>{
     res.status(200).json(posts);
 });
 
-function buscapost(id){
-  return posts[id - 1]
+function localizarPostPorId(id){
+  return posts.findIndex((post) =>{
+      return post.id === Number(id)
+  })
 };
 
 app.get("/posts/:id", (req, res) =>{
-    const index = buscapost(req.params.id);
-    res.status(200).json(index);
+    const index = localizarPostPorId(req.params.id);
+    res.status(200).json(posts[index]);
 });
