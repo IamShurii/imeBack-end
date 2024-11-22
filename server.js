@@ -44,6 +44,11 @@ app.get("/posts", (req,res) =>{
     res.status(200).json(posts);
 });
 
+function buscapost(id){
+  return posts[id - 1]
+};
+
 app.get("/posts/:id", (req, res) =>{
-    res.status(200).json(posts)
-})
+    const index = buscapost(req.params.id);
+    res.status(200).json(index);
+});
