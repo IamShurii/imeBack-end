@@ -16,17 +16,17 @@ async function getPosts(){
     return colecao.find().toArray()
 }
 
-app.get("/posts", async(req,res) =>{
-  const posts = await getPosts()
+const posts = await getPosts()
+
+app.get("/posts",(req,res) =>{
     res.status(200).json(posts);
 });
 
 //function localizarPostPorId(id){
 //  return posts.findIndex((post) =>{
-//      return post.id === Number(id)
+//      return post.id === String(id)
 //  })
-//};
-
+//}
 //app.get("/posts/:id", (req, res) =>{
 //    const index = localizarPostPorId(req.params.id);
 //    res.status(200).json(posts[index]);
