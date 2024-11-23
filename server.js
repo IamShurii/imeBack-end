@@ -10,7 +10,7 @@ app.listen(3000, () => {
     console.log("Servidor escutando!");
 });
 
-async function getPosts(){
+export async function getPosts(){
     const db = conexao.db("Imersão-InstaByte")
     const colecao = db.collection("posts")
     return colecao.find().toArray()
