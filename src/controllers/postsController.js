@@ -13,6 +13,6 @@ export async function criarNovoPost(req, res) {
     }
     catch (error) {
         console.error(error.message)
-        res.status(500).json({"erro": "Falha na requisição"})
+        res.status(500).json({"erro": "Falha na requisição0"})
     }
 }
