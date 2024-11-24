@@ -10,5 +10,7 @@ export async function getPosts(){
 }
 
 export async function criarPost(body) {
-    
+    const db = conexao.db("Imersão-InstaByte");
+    const colecao = db.collection("posts");
+    return colecao.insertOne(body)
 }

@@ -1,4 +1,4 @@
-import { getPosts } from "../models/postsModel.js";
+import { getPosts, criarPost} from "../models/postsModel.js";
 
 export async function listarPosts (req,res){
     const posts = await getPosts();
