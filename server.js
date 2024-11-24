@@ -8,8 +8,3 @@ routes(app)
 app.listen(3000, () => {
     console.log("Servidor escutando!");
 });
-
-app.get("/posts",(req,res) =>{
-    res.status(200).json(posts);
-});
-
