@@ -9,8 +9,12 @@ export async function getPosts(){
     return colecao.find().toArray()
 }
 
-export async function criarPost(body) {
+export async function criarPost(post) {
     const db = conexao.db("Imersão-InstaByte");
     const colecao = db.collection("posts");
     return colecao.insertOne(body)
+}
+
+export async function criarUpload(upload) {
+    
 }
