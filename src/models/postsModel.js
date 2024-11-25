@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import conectarAoBanco from "../config/dbconfig.js"
 
 const VariavelConexao = process.env.STRING_CONEXAO;
@@ -15,3 +16,11 @@ export async function criarPost(post) {
     return colecao.insertOne(post)
 }
 
+export async function attPost(id , post) {
+    const db = conexao.db("Imersão-InstaByte");
+    const colecao = db.collection("posts");
+    
+    const objId = ObjectId.createFromHexString(id)
+    
+    return colecao.updateOne({_id: new ObjectId(objId)},{$set: post} )
+}
