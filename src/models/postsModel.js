@@ -1,4 +1,5 @@
 import { ObjectId } from "mongodb";
+import 'dotenv/config';
 import conectarAoBanco from "../config/dbconfig.js"
 
 const VariavelConexao = process.env.STRING_CONEXAO;
