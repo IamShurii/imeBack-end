@@ -1,4 +1,5 @@
 import express from "express"
+import fs from "fs"
 import { getPosts, criarPost} from "../models/postsModel.js";
 
 export async function listarPosts (req,res){
@@ -19,10 +20,19 @@ export async function criarNovoPost(req, res) {
 }
 
 export async function uploadImagem(req, res) {
-    const novoUpload = req.body
+    const novoUpload = {
+        descricao: "",
+        imgUrl: req.file.originalname,
+        alt: ""
+    }
     try {
-        const upload = await criarUpload(novoUpload)
-    } catch (error) {
-        
+        const postFinal = await criarPost(novoUpload)
+        const imagemAtualizada = `uploads/${postFinal.insertedId}.png`
+        fs.renameSync(req.file.path, imagemAtualizada)
+        res.status(200).json(postFinal)
+    }
+    catch (error) {
+        console.error(error.message)
+        res.status(500).json({"erro": "Falha na requisição0"})
     }
 }
