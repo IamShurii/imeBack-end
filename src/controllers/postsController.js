@@ -1,6 +1,7 @@
 import express from "express"
 import fs from "fs"
 import { getPosts, criarPost, attPost } from "../models/postsModel.js";
+import gerarDescricaoComGemini from "../services/geminiServices.js";
 
 export async function listarPosts (req,res){
     const posts = await getPosts();
@@ -40,12 +41,16 @@ export async function uploadImagem(req, res) {
 export async function attNovoPost(req, res) {
     const id = req.params.id;
     const ulrImg = `https://localhost:3000/${id}.png`
-    const post = {
-        imgUrl: ulrImg,
-        descricao: req.body.descricao,
-        alt: req.body.alt
-    }
+    
     try {
+        const imageBuf = fs.readFileSync(`uploads/${id}.png`)
+        const desc = await gerarDescricaoComGemini(imageBuf)
+
+        const post = {
+            imgUrl: ulrImg,
+            descricao: desc,
+            alt: req.body.alt
+        }
         const postFinal = await attPost(id,post)
         res.status(200).json(postFinal)
     }
